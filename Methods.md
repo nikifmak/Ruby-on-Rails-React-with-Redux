@@ -204,5 +204,176 @@ input = gets.chomp.strip.downcase
 
 ## Built-in methods
 
-### reverse
+### reverse, upcase
+
+```ruby
+puts "string".methods.sort
+```
+
+## Methods Name Conventions
+
+## to_something
+
+Methods that are used for type convertion. `to_<something>`.
+
+```ruby
+p 3 # 3
+p 3.to_s # "3"
+p "3".to_i # 3
+p "3".to_f # 3.0
+
+p "120 bananas".to_i # 0 
+```
+
+### Method +
+
+```ruby
+puts "2" + 5
+
+# Error
+no implicit conversion of Fixnum into String
+```
+
+The `+` sign actually is a method of the string "2", `.+`. When we write `puts "2" + 5`, it actually is:
+
+```ruby
+puts "2".+(5)
+
+# fixed
+puts "2".to_i + 5
+```
+
+And that is because we get the type error.
+
+## ! Dangerous methods
+
+Methods with an `method_name!` at the end of their name have a **safe** version with the name `method_name`.
+
+<u>Safe method example:</u>
+
+```ruby
+vigilante = "Batman"
+vigilante.upcase
+
+p vigilante # "Batman
+```
+
+> The initial variable remains the same.
+
+Dangerous method:
+
+```ruby
+vigilante = "Batman"
+vigilante.upcase!
+
+p vigilatnte # "BATMAN"
+```
+
+> It changes the variable.
+
+So Dangerous methods are impure thus they have side effects.
+
+## ? Boolean methods
+
+These methods return `true` or `false`.
+
+```ruby
+p vigilante.nil? # false
+
+p nil.nil? # true
+
+p "Batman".include?("B") # true
+
+p vigilante.empty? # true
+
+p " ".empty? # false
+```
+
+## Optional Arguments
+
+```ruby
+def sum(x, y)
+  x + y
+end
+
+p sum(1, 2 ,3) # wrong number of arguments (given 3, expected 2)
+```
+
+We can define the function with default arguments so when we pass less than the number we have defined arguments then ruby replaces them with the default defined values.
+
+```ruby
+def sum(x, y=0, z=0)
+  x + y + z
+end
+
+p sum(6) # 6
+p sum(1, 2, 3) # 6
+```
+
+## Scopes
+
+We can use the same variable name in different parts of our program and the reason we can do that is because of a concept called "Scope".
+
+We can think about scope as the context in which a variable means the same thing.
+
+```ruby
+def my_house
+  dog = "ermis"
+end
+
+puts dog #undefined local variable or method `dog'
+```
+
+```ruby
+bananas = 0 
+
+def pick_banana
+  bananas += 1
+end
+
+pick_banana # undefined method `+' for nil:NilClass
+```
+
+Inside the method `pick_banana` the is no reference to the `bananas` variable. To fix this we need to define an `instance variable`.
+
+```ruby
+# instance variable
+@bananas = 0
+```
+
+Now `@bananas` is an instance variable that belongs to `Main` object
+
+```ruby
+@bananas = 0 
+
+def pick_banana
+  @bananas += 1
+end
+
+pick_banana # 1 
+```
+
+## Better to use the smallest possible scope
+
+```ruby
+@bananas = 0 # instance variable
+
+def pick_banana
+  @bananas += 1
+end
+
+pick_banana # 1
+
+bananas = 23 # local variable
+
+def tally_me_banana
+  puts "You've picked #{@bananas} bananas"
+end
+
+def tally_me_banana(fruit)
+  puts "You've picked #{fruit} bananas"
+end
+
+tally_me_banana(bananas) # You've picked 23 bananas
+```
 
