@@ -253,7 +253,7 @@ Methods with an `method_name!` at the end of their name have a **safe** version 
 
 ```ruby
 vigilante = "Batman"
-vigilante.upcase
+vigilante.upcase # "BATMAN"
 
 p vigilante # "Batman
 ```

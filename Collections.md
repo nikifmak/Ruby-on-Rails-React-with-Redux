@@ -93,8 +93,50 @@ p contacts[0][:friends][0] # "Ni"
 ## Adding Values to Hashes
 
 ```ruby
-
+favorite_foods = {
+  ermis: "pizza",
+  diesel: "pizza",
+  bello: "dijon mustard"
+}
 ```
 
+```Ruby
+favorite_foods[:luna] = "crispy bacon"
+```
 
+## Deleting Values
+
+```ruby
+favorite_foods.delete(:bello)
+```
+
+## Creating a hash and putting the default value right away.
+
+```ruby
+fruits = new Hash(0)
+```
+
+`0` is the default value.
+
+```ruby
+p fruits[:apple] # 0
+```
+
+## Getting the list of keys
+
+```ruby
+pets = favorite_foods.keys # [:ermis, :diesel, :bello]
+```
+
+## Getting the list of values
+
+```ruby
+foods = favorite_foods.values # ["pizza", "pizza", "dijon mustard", "crispy bacon"]
+```
+
+## Getting Unique values
+
+```ruby
+foods = favorite_foods.values.uniq # ["pizza", "dijon mustard", "crispy bacon"]
+```
 
