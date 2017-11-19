@@ -278,5 +278,123 @@ puts (1..10).find {|n| n % 7 ==0 } # 7 => nil
 puts (1..10).detect {|n| n % 7 ==0 } # 7 => nil
 ```
 
+## Reduce
+
+```ruby
+costs = [34, 54, 65, 14]
+
+sum = costs.reduce do |total, receipt|
+  total + receipt 
+end
+
+# total is the acculator
+# total + receipt means total += receipt
+```
+
+## Inject = reduce
+
+With initial value
+
+```ruby
+# factorial
+(1..5).inject(1) {|product, m| product * n }
+# array
+[2, 24, 54].inject(1) {|product, m| product * n }
+```
+
+## Reduce and Inject with symbols  
+
+When using `:+, :*, :%, :- ` symbols on reduce/inject, the action of the operator is applied in the input by pairs.
+
+```ruby
+[2, 24, 54].reduce(:+) #returns the sum
+```
+
+The following 2, are the same:
+
+```ruby
+[2, 3, 4].reduce(:*)
+# and
+[2, 3, 4].reduce {|product, n| product.*(n)}
+```
+
+## Another syntax of reduce
+
+Initial value with `:` symbol use.
+
+```ruby
+profits = 20000
+expenses = [100, 2400, 231, 50, 21]
+
+expenses.reduce(profits, :-)
+```
+
+## Iteration on hashes
+
+Iteration methods can be used on hashes too.
+
+```ruby
+# each
+# each_with_index
+# map
+# reduce
+# select
+```
+
+```ruby
+sidekicks = {
+	"Batman" => "Robin",
+	"Superman" => "Jimmy Olsen",
+	"Captain America" => "Bucky"
+}
+
+sidekicks.each do |key, value|
+    puts "#{value} is the sidekick of #{key}"
+end
+# print
+# Robin is the sidekick of Batman
+#Jimmy Olsen is the sidekick of Superman
+#Bucky is the sidekick of Captain America
+
+```
+
+## Block |pair|
+
+Returns pair 
+
+```ruby
+sidekicks.each do |pair|
+    p pair
+end
+# prints
+["Batman", "Robin"]
+["Superman", "Jimmy Olsen"]
+["Captain America", "Bucky"]
+```
+
+## each_key
+
+```ruby
+sidekicks.each_key do |key|
+    puts "#{key} works alone"
+end
+```
+
+## each_value
+
+```ruby
+sidekicks.each_value do |value|
+    puts "#{value} is sidekick"
+end
+```
+
+## Hashes are ordered
+
+```ruby
+sidekicks.each_with_index do |(hero, value), index|
+    puts "#{index + 1}. #{hero} and #{sidekick} to the rescue!"
+end
+```
+
 
 
